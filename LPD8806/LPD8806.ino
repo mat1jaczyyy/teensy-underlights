@@ -5,14 +5,12 @@
 
 /*  
  * LED Strip definition
- *  0 = WS2812
- *  1 = LPD8806
  * --------------------
  */
 
 const byte _nLED = 60;  // Number of LEDs
 const byte _dLED = 4;   // Data pin
-const byte _cLED = 3;   // Clock pin (not necessary for WS2812)
+const byte _cLED = 3;   // Clock pin
 
 #include <LPD8806.h>
 LPD8806 _LED = LPD8806(_nLED, _dLED, _cLED);
