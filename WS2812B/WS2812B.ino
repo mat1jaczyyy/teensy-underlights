@@ -1,6 +1,6 @@
 /*
- *     USB MIDI to WS2812 by mat1jaczyyy
- *     ---------------------------------
+ *     USB MIDI to WS2812B by mat1jaczyyy
+ *     ----------------------------------
  */
 
 /*  
@@ -9,7 +9,7 @@
  */
 
 const byte _nLED = 60;  // Number of LEDs
-const byte _dLED = 4;   // Strip data pin
+const byte _dLED = 4;   // Data pin
 
 #include <Adafruit_NeoPixel.h>
 Adafruit_NeoPixel _LED = Adafruit_NeoPixel(_nLED, _dLED, NEO_GRB + NEO_KHZ800);
