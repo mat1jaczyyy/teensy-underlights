@@ -35,10 +35,19 @@ bool update = false;
 
 void noteOn(byte ch, byte p, byte v) {
   _LED.setPixelColor(p - _pStart, _r[v], _b[v], _g[v]);  // LPD8806 uses RBG format
+  update = true;
 }
 
 void noteOff(byte ch, byte p, byte v) {
   _LED.setPixelColor(p - _pStart, 0, 0, 0);
+  update = true;
+}
+
+void sysEx(byte *data, unsigned int length) {
+  if (length == 6) {
+    _LED.setPixelColor(*(data+1) - _pStart, *(data+2), *(data+4), *(data+3));
+    update = true;
+  }
 }
 
 /*
@@ -52,6 +61,7 @@ void setup() {
   
   usbMIDI.setHandleNoteOn(noteOn);
   usbMIDI.setHandleNoteOff(noteOff);
+  usbMIDI.setHandleSystemExclusive(sysEx);
 }
 
 /*
@@ -59,9 +69,7 @@ void setup() {
  * --------------------------
  */
 void loop() {
-  while (usbMIDI.read()) {
-    update = true;
-  }
+  while (usbMIDI.read());
   if (update) {
     _LED.show();
     update = false;
