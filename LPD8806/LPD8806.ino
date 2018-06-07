@@ -8,7 +8,7 @@
  * --------------------
  */
 
-const byte _nLED = 60;  // Number of LEDs
+const byte _nLED = 42;  // Number of LEDs
 const byte _dLED = 4;   // Data pin
 const byte _cLED = 3;   // Clock pin
 
