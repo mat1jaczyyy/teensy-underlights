@@ -23,7 +23,7 @@ Connect your board with the LED strip using the [schematic](https://github.com/m
 
 ## Software
 
-Modify the Arduino script according to your LED strip configuration (`_nLED` = Number of LEDs < 128, `_dLED` = Data pin, `_cLED` = Clock pin) and compile and upload to your board.
+Modify the Arduino script according to your LED strip configuration (`_nLED` = Number of LEDs < 128, `_dLED` = Data pin, `_cLED` = Clock pin) and compile and upload to your board. You can also change your MIDI device name by editing `name.c`.
 
 ## Retina Palettes
 
