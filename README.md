@@ -23,13 +23,14 @@ Connect your board with the LED strip using the [schematic](https://github.com/m
 
 ## Software
 
-Modify the Arduino script according to your LED strip configuration (`_nLED` = Number of LEDs < 128, `_dLED` = Data pin, `_cLED` = Clock pin) and compile.
-
-## Usage
-
-Sending standard MIDI note-offs and note-ons on any channel will trigger the LED with the match color. Sending a SysEx message in the format `F0 PP RR GG BB F7` (where `PP` is the LED index, `RR` is the red component of the color, `GG` is the greeb component of the color, and `BB` is the blue component of the color) will directly set the LED to a desired color.
+Modify the Arduino script according to your LED strip configuration (`_nLED` = Number of LEDs < 128, `_dLED` = Data pin, `_cLED` = Clock pin) and compile and upload to your board.
 
 ## Retina Palettes
 
 The `retinaConverter.py` Python 3 script will take a Retina palette file as input, and output equivalent `_r`, `_g` and `_b` arrays to replace in the script.
+
 ```$ python3 retinaConverter.py < paletteFile > array.txt```
+
+## Usage
+
+Sending standard MIDI note-offs and note-ons on any channel will trigger the LED with the matching color (from the palette arrays). Sending a SysEx message in the format `F0 PP RR GG BB F7` (where `PP` is the LED index, `RR` is the red component of the color, `GG` is the greeb component of the color, and `BB` is the blue component of the color) will directly set the LED to a desired color.
