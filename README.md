@@ -33,4 +33,4 @@ The `retinaConverter.py` Python 3 script will take a Retina palette file as inpu
 
 ## Usage
 
-Sending standard MIDI note-offs and note-ons on any channel will trigger the LED with the matching color (from the palette arrays). Sending a SysEx message in the format `F0 PP RR GG BB F7` (where `PP` is the LED index, `RR` is the red component of the color, `GG` is the greeb component of the color, and `BB` is the blue component of the color) will directly set the LED to a desired color.
+Sending standard MIDI note-offs and note-ons on any channel will trigger the LED with the matching color (from the palette arrays). Sending a SysEx message in the format `F0 PP RR GG BB F7` (where `PP` is the LED index, `RR` is the red component of the color, `GG` is the green component of the color, and `BB` is the blue component of the color) will directly set the LED to a desired color.
