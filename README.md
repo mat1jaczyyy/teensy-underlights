@@ -11,7 +11,7 @@ This Arduino project allows for controlling a LED strip from a DAW program (via 
     * Teensy 2 (8-bit) and certain Arduino boards might work, but have not been tested and are not officially supported.
 * [Arduino Software](https://www.arduino.cc/en/Main/Software)
     * Developed with **version 1.8.5**, but older versions will likely work.
-    * Also requires [Teensyduino](https://www.pjrc.com/teensy/teensyduino.html).
+    * Also requires [Teensyduino](https://www.pjrc.com/teensy/teensyduino.html), and the [LPD8806 Arduino library](https://github.com/adafruit/LPD8806) if you're using the LPD8806.
 * OS
     * **Windows, Linux and macOS** are officially supported.
 * DAW Software
@@ -23,7 +23,7 @@ Connect your board with the LED strip using the [schematic](https://github.com/m
 
 ## Software
 
-Modify the Arduino script according to your LED strip configuration (`_nLED` = Number of LEDs < 128, `_dLED` = Data pin, `_cLED` = Clock pin) and compile and upload to your board. You can also change your MIDI device name by editing `name.c`.
+If you haven't already, install Teensyduino for Arduino, and the LPD8806 libraries if applicable (the correct path for the `LPD8806.cpp` and `LPD8806.h` files from the adafruit repository is `Documents/Arduino/libraries/LPD8806/`) Modify the Arduino script according to your LED strip configuration (`_nLED` = Number of LEDs < 128, `_dLED` = Data pin, `_cLED` = Clock pin LPD8806 only). Under Tools, make sure `USB Type: "MIDI"`, `Optimize Code: Fastest` and your board are selected, then compile and upload to your board. You can also change your MIDI device name by editing `name.c`.
 
 ## Retina Palettes
 
