@@ -27,7 +27,7 @@ If you haven't already, install Teensyduino for Arduino, and the LPD8806 librari
 
 ## Retina Palettes
 
-The `retinaConverter.py` Python 3 script will take a Retina palette file as input, and output equivalent `_r`, `_g` and `_b` arrays to replace in the script.
+The `retinaConverter.py` Python 3 script will take a Retina palette file as input, and output equivalent `_r`, `_g` and `_b` arrays to replace in the script. Before running the script, you should uncomment one of these [lines](https://github.com/mat1jaczyyy/teensy-underlights/blob/master/retinaConverter.py#L9-L10) depending on your LED strip. Then, run it with:
 
 ```$ python3 retinaConverter.py < paletteFile > array.txt```
 
