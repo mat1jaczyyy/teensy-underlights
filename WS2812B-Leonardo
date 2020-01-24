@@ -1,3 +1,13 @@
+  
+/*
+ *     USB MIDI to WS2812B by mat1jaczyyy & 4D
+ *     ----------------------------------
+ */
+
+/*  
+ * LED Strip definition
+ * --------------------
+ */
 #include "MIDIUSB.h"
 #include "PitchToNote.h"
 
