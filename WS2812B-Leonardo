@@ -1,7 +1,7 @@
 #include "MIDIUSB.h"
 #include "PitchToNote.h"
 
-const byte _NLED = 64;
+const byte _NLED = 60;
 const byte _DPIN = 2;
 
 #include <Adafruit_NeoPixel.h>
