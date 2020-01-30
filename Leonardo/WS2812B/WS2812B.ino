@@ -1,15 +1,13 @@
   
 /*
  *     USB MIDI to WS2812B by mat1jaczyyy & 4D
- *     ----------------------------------
+ *     ---------------------------------------
  */
 
 /*  
  * LED Strip definition
  * --------------------
  */
-#include "MIDIUSB.h"
-#include "PitchToNote.h"
 
 const byte _NLED = 60;
 const byte _DPIN = 2;
@@ -17,49 +15,54 @@ const byte _DPIN = 2;
 #include <Adafruit_NeoPixel.h>
 Adafruit_NeoPixel _LED = Adafruit_NeoPixel(_NLED, _DPIN, NEO_GRB + NEO_KHZ800);
 
+/*
+ * Color Palette
+ * Generate with retinaConverter.py (Retina 2.0+ Palette)
+ * ------------------------------------------------------
+ */
+
 const byte _R[128] = {0, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 45, 93, 142, 223, 190, 28, 61, 93, 190, 125, 12, 28, 45, 158, 61, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 12, 28, 45, 158, 61, 28, 61, 93, 190, 125, 45, 93, 142, 223, 190, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 36, 73, 109, 146, 182, 219, 255};
 const byte _G[128] = {0, 0, 0, 0, 125, 0, 12, 28, 45, 158, 61, 28, 61, 93, 190, 125, 45, 93, 142, 223, 190, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 45, 93, 142, 223, 190, 28, 61, 93, 190, 125, 12, 28, 45, 158, 61, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 36, 73, 109, 146, 182, 219, 255};
 const byte _B[128] = {0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 12, 28, 45, 158, 61, 28, 61, 93, 190, 125, 45, 93, 142, 223, 190, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 61, 125, 190, 255, 255, 45, 93, 142, 223, 190, 28, 61, 93, 190, 125, 12, 28, 45, 158, 61, 36, 73, 109, 146, 182, 219, 255};
 
+/*
+ * MIDI handler
+ * ------------
+ */
 
+#include "MIDIUSB.h"
+#include "PitchToNote.h"
 
 const byte _PStart = 36;  // First note in array
 bool update = false;
 
-
-void setup() {
-_LED.begin();
-_LED.show();
+void note(byte pitch, byte velocity) {
+  _LED.setPixelColor(pitch - _PStart, _R[velocity], _G[velocity], _B[velocity]);
+  update = true;
 }
 
+void setup() {
+  _LED.begin();
+  _LED.show();
+}
 
 void loop() {
   midiEventPacket_t rx;
   do { 
     rx = MidiUSB.read();
-    if(rx.header == 0x9) noteOn(rx.byte1, rx.byte2,rx.byte3);
-    if(rx.header == 0x8) noteOff(rx.byte1, rx.byte2,rx.byte3);
-//    if(rx.header == 0xB) controlChange(rx.byte2, rx.byte3);
+    if (rx.header == 0x9) note(rx.byte2, rx.byte3);
+    if (rx.header == 0x8) note(rx.byte2, 0);
+  } while (rx.header == 0);
+
+  if (update) {
+    _LED.show();
+    update = false;
   }
-  while (rx.header == 0); // hold until a MIDI message is received
 }
 
-void noteOn(byte channel, byte pitch, byte velocity) {
-  _LED.setPixelColor(pitch - _PStart, _R[velocity], _G[velocity], _B[velocity]);
-  update = true;
-  _LED.show();
-}
-
-void noteOff(byte channel, byte pitch, byte velocity) {
-  _LED.setPixelColor(pitch - _PStart, 0, 0, 0);
-  update = true;
-  _LED.show();
-}
-
-//void controlChange(byte *data, unsigned int length) {
+//void sysEx(byte *data, unsigned int length) {
 //  if (length == 6) {
 //    _LED.setPixelColor(*(data+1) - _PStart, *(data+2), *(data+3), *(data+4));
 //    update = true;
-//    _LED.show();
 //  }
 //}
