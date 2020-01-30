@@ -7,11 +7,12 @@ This Arduino project allows for controlling a LED strip from a DAW program (via 
 * LED Strip
 	* The **LPD8806** and **WS2812B** strips are implemented in separate Arduino projects. 
 * USB Development Board
-    * A **32-bit PJRC Teensy** is highly recommended. A [Teensy-LC](https://www.pjrc.com/store/teensylc.html) was used while developing this project and is officially supported alongside other Teensy 3 models.
-    * Teensy 2 (8-bit) not work and certain Arduino atmega32u4 boards might work, tested and supported.
+    * A **32-bit PJRC Teensy** is highly recommended. A [Teensy-LC](https://www.pjrc.com/store/teensylc.html) was used while developing this project and is officially supported alongside other Teensy 3 models.\
+    * Most Arduino atmega32u4 boards should work (such as the [Arduino Leonardo](https://store.arduino.cc/arduino-leonardo-with-headers), these have been tested and are unofficially supported (thanks [4dvn](https://github.com/4dvn)!).
+    * Teensy 2 (8-bit) boards might work with modifications, but are not supported.
 * [Arduino Software](https://www.arduino.cc/en/Main/Software)
     * Developed with **version 1.8.5**, but older versions will likely work.
-    * Also requires [Teensyduino](https://www.pjrc.com/teensy/teensyduino.html), and the [LPD8806 Arduino library](https://github.com/adafruit/LPD8806) if you're using the LPD8806.
+    * Additionally requires [Teensyduino](https://www.pjrc.com/teensy/teensyduino.html) if you're using a Teensy 3 board, and the [LPD8806 Arduino library](https://github.com/adafruit/LPD8806) if you're using the LPD8806.
 * OS
     * **Windows, Linux and macOS** are officially supported.
 * DAW Software
