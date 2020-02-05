@@ -12,8 +12,11 @@
 const byte _NLED = 60;
 const byte _DPIN = 2;
 
-#include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel _LED = Adafruit_NeoPixel(_NLED, _DPIN, NEO_GRB + NEO_KHZ800);
+//const byte _dLED = 4;   // Data pin
+//const byte _cLED = 3;   // Clock pin
+
+//#include <LPD8806.h>
+//LPD8806 _LED = LPD8806(_nLED, _dLED, _cLED);
 
 /*
  * Color Palette
@@ -37,7 +40,7 @@ const byte _PStart = 36;  // First note in array
 bool update = false;
 
 void note(byte pitch, byte velocity) {
-  _LED.setPixelColor(pitch - _PStart, _R[velocity], _G[velocity], _B[velocity]);
+  _LED.setPixelColor(pitch - _PStart, _R[velocity], _G[velocity], _B[velocity]); // LPD8806 uses RBG format
   update = true;
 }
 
