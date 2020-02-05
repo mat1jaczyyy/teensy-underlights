@@ -39,12 +39,12 @@ const byte _B[128] = {0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0
 const byte _PStart = 36;  // First note in array
 bool update = false;
 //Debug serial
-*\
-void note(byte pitch, byte velocity) {
-  _LED.setPixelColor(pitch - _PStart, _R[velocity], _G[velocity], _B[velocity]); // LPD8806 uses RBG format
-  update = true;
-}
-*/
+
+//void note(byte pitch, byte velocity) {
+//  _LED.setPixelColor(pitch - _PStart, _R[velocity], _G[velocity], _B[velocity]); // LPD8806 uses RBG format
+//  update = true;
+//}
+
 void setup() {
   _LED.begin();
   _LED.show();
