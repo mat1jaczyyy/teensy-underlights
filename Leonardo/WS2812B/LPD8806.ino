@@ -34,7 +34,6 @@ const byte _B[128] = {0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0, 0, 125, 0, 0, 0
  */
 
 #include "MIDIUSB.h"
-//#include "PitchToNote.h"
 
 const byte _PStart = 36;  // First note in array
 bool update = false;
