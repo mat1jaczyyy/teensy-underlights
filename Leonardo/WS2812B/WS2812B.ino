@@ -8,7 +8,7 @@
  * --------------------
  */
 
-const byte _NLED = 60;
+const byte _NLED = 16;
 const byte _DPIN = 2;
 
 #include <Adafruit_NeoPixel.h>
